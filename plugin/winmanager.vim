@@ -271,7 +271,8 @@ function! <SID>StartWindowsManager()
 		let cen = 1
 		" for now assume that the explorer windows always stay on the left.
 		" TODO: make this optional later
-		wincmd H
+		"wincmd H
+		wincmd L
 		" set up the correct width
 		exe g:winManagerWidth.'wincmd |'
 	end
@@ -1062,6 +1063,9 @@ function! <SID>ToggleWindowsManager()
 		call s:CloseWindowsManager()
 	else
 		call s:StartWindowsManager()
+		"NERD_tree need this. 打开时会有一个空白窗口，要把他关闭。
+		exe '1wincmd w'
+		exe 'q'
 	end
 endfunction
 
